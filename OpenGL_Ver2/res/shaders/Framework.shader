@@ -3,11 +3,10 @@
 
 layout(location = 0) in vec4 position;
 
-out vec2 v_TexCoord;
+uniform mat4 u_MVP;
 
 void main()
 {
-	vec4 edge = {postion.x * 1.1, position.y * 1.1, 1.0f, 1.0f}
 	gl_Position = u_MVP * position;
 };
 

@@ -60,6 +60,9 @@
     <ClCompile Include="src\SceneSystem\GameMainScene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\Render\TextRender.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\glm\detail\_features.hpp">
@@ -956,6 +959,9 @@
     <ClInclude Include="src\SceneSystem\GameMainScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\Render\TextRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\vendor\glm\detail\func_common.inl">
@@ -1368,6 +1374,7 @@
     </None>
     <None Include="res\shaders\Basic.shader" />
     <None Include="res\shaders\Framework.shader" />
+    <None Include="res\shaders\Text.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\Loading.jpg">
@@ -1385,8 +1392,15 @@
     <Image Include="res\textures\GamingMainScene.jpg">
       <Filter>资源文件</Filter>
     </Image>
-    <Image Include="res\textures\MainMenu.jpg">
+    <Image Include="res\textures\MainMenu.png">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="res\textures\Button.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\arial.ttf" />
+    <Font Include="res\fonts\snacko.ttf" />
   </ItemGroup>
 </Project>

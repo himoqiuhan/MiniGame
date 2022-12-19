@@ -9,6 +9,7 @@
 #include "VertexArray.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "TextRender.h"
 
 #include "glm/detail/glm.cpp"
 #include "glm/gtc/matrix_transform.hpp"
@@ -26,7 +27,7 @@ namespace scene
 		virtual ~Base(){}
 
 		virtual void SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister) {}
-		virtual void OnRender() {}
+		virtual void OnRender(Text& text) {}
 		virtual void OnUpdate() {}
 	};
 }

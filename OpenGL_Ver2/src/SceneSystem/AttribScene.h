@@ -11,7 +11,7 @@ namespace scene
 		~AttribScene();
 
 		void SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister) override;
-		void OnRender() override;
+		void OnRender(Text& text) override;
 		void OnUpdate() override;
 	private:
 		std::unique_ptr<VertexBuffer>m_VertexBuffer;

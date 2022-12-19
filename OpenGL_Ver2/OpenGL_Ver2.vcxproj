@@ -93,13 +93,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\FreeType\include;src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -110,15 +110,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\FreeType\include;src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\FreeType\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freetype.lib;glew32s.lib;glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -160,6 +160,7 @@
     <ClCompile Include="src\Render\GLCall.cpp" />
     <ClCompile Include="src\Render\IndexBuffer.cpp" />
     <ClCompile Include="src\Render\Shader.cpp" />
+    <ClCompile Include="src\Render\TextRender.cpp" />
     <ClCompile Include="src\Render\Texture.cpp" />
     <ClCompile Include="src\Render\VertexArray.cpp" />
     <ClCompile Include="src\Render\VertexBuffer.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="src\Render\IndexBuffer.h" />
     <ClInclude Include="src\Render\Renderer.hpp" />
     <ClInclude Include="src\Render\Shader.h" />
+    <ClInclude Include="src\Render\TextRender.h" />
     <ClInclude Include="src\Render\Texture.h" />
     <ClInclude Include="src\Render\VertexArray.h" />
     <ClInclude Include="src\Render\VertexBuffer.h" />
@@ -475,6 +477,7 @@
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
     <None Include="res\shaders\Framework.shader" />
+    <None Include="res\shaders\Text.shader" />
     <None Include="src\vendor\glm\detail\func_common.inl" />
     <None Include="src\vendor\glm\detail\func_common_simd.inl" />
     <None Include="src\vendor\glm\detail\func_exponential.inl" />
@@ -616,9 +619,14 @@
     <Image Include="res\textures\AllocScene.jpg" />
     <Image Include="res\textures\AssignmentScene.jpg" />
     <Image Include="res\textures\AttribScene.jpg" />
+    <Image Include="res\textures\Button.jpg" />
     <Image Include="res\textures\GamingMainScene.jpg" />
     <Image Include="res\textures\Loading.jpg" />
-    <Image Include="res\textures\MainMenu.jpg" />
+    <Image Include="res\textures\MainMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\arial.ttf" />
+    <Font Include="res\fonts\snacko.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

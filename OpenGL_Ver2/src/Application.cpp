@@ -7,6 +7,7 @@
 #include <sstream>
 #include <vector>
 #include <functional>
+#include <map>
 
 #include "Renderer.hpp"
 
@@ -27,6 +28,11 @@
 #include "AssignmentScene.h"
 #include "AttribScene.h"
 #include "GameMainScene.h"
+#include "TextRender.h"
+
+// FreeType
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 int main(void)
 {
@@ -60,6 +66,16 @@ int main(void)
 
 	glfwSwapInterval(10);
 
+	// Define the viewport dimensions
+	glViewport(0, 0, WIN_WIDTH, WIN_HEIGHT);
+
+	// Set OpenGL options
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	Text textrender;
+
 	{
 		
 		scene::Base* currentScene = nullptr;
@@ -87,14 +103,15 @@ int main(void)
 			
 			/* Render here */
 			
-			currentScene->OnRender();
+			currentScene->OnRender(textrender);
 			currentScene->SceneChangeController(window,currentScene,ScenesRegister);
 
 
-			/* Swap front and back buffers */
-			glfwSwapBuffers(window);
 
-			/* Poll for and process events */
+
+
+
+			glfwSwapBuffers(window);
 			glfwPollEvents();
 		}
 	}
