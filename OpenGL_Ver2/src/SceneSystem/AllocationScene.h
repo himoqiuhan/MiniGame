@@ -10,8 +10,8 @@ namespace scene
 		AllocationScene();
 		~AllocationScene();
 
-		void SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister) override;
-		void OnRender(Text& text) override;
+		void SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister,std::vector<Member>& member,  std::vector<Mission>& mission) override;
+		void OnRender(Text& text, std::vector<Member>& member,  std::vector<Mission>& mission) override;
 		void OnUpdate() override;
 	private:
 		std::unique_ptr<VertexBuffer>m_VertexBuffer;
@@ -20,8 +20,7 @@ namespace scene
 		std::unique_ptr<Shader> m_Shader;
 		std::unique_ptr<Texture> m_Texture;
 
-		glm::mat4 m_Proj, m_View;
-		glm::vec3 m_TranslationA, m_TranslationB;
+		glm::mat4 m_Proj, m_View, model, mvp;
 
 		double xpos, ypos;
 	};

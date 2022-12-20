@@ -4,15 +4,14 @@ namespace scene
 {
 
 	AssignmentScene::AssignmentScene()
-		:m_TranslationA{ -1,0,0 },m_TranslationB{1,0,0},
-		m_Proj(glm::ortho(-4.0f, 4.0f, -2.25f, 2.25f, -1.0f, 1.0f)),
+		:m_Proj(glm::ortho(0.0f, 2.0f, 0.0f, 2.0f, -1.0f, 1.0f)),
 		m_View(glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0)))
 	{
 		float positions[] = {
-			-0.5f, -0.5f, 0.0f, 0.0f, //0
-			 0.5f, -0.5f, 1.0f, 0.0f, //1
-			 0.5f,  0.5f, 1.0f, 1.0f, //2
-			-0.5f,  0.5f, 0.0f, 1.0f, //3
+			-1.0f, -1.0f, 0.0f, 0.0f, //0
+			 1.0f, -1.0f, 1.0f, 0.0f, //1
+			 1.0f,  1.0f, 1.0f, 1.0f, //2
+			-1.0f,  1.0f, 0.0f, 1.0f, //3
 		};
 
 		unsigned int indices[] = {
@@ -35,7 +34,7 @@ namespace scene
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_Shader->Bind();
 
-		m_Texture = std::make_unique<Texture>("res/textures/AssignmentScene.jpg");
+		m_Texture = std::make_unique<Texture>("res/textures/AssignmentScene.png");
 		m_Texture->Bind();
 		m_Shader->SetUniform1i("u_Texture", 0);
 
@@ -45,28 +44,83 @@ namespace scene
 	{
 	}
 
-	void AssignmentScene::SceneChangeController(GLFWwindow* window,Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister)
+	void AssignmentScene::SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister, std::vector<Member>& member, std::vector<Mission>& mission)
 	{
 		glfwGetCursorPos(window, &xpos, &ypos);
 
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);
 
-		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+		if (xpos > 20 && xpos < 520 && ypos > 900 && ypos < 1080)
 		{
-			std::cout << "Assignment: " << "x: " << xpos << "y: " << ypos << std::endl;
-			if (xpos >= WIN_WIDTH / 2)
+			m_TextColor = glm::vec3(1.0f, 1.0f, 1.0f);
+			if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 			{
-				currentScene = ScenesRegister[5];
+				std::cout << "x: " << xpos << "y: " << ypos << std::endl;
+				currentScene = ScenesRegister[1];
+			}
+		}
+		else
+		{
+			m_TextColor = glm::vec3(0.5f, 0.8f, 1.0f);
+		}
+
+		if (xpos > 700 && xpos < 1200)
+		{
+			if (ypos > 180 && ypos < 300)
+			{
+				m_TextColorA = glm::vec3(0.5, 0.5, 0.5);
+				if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+				{
+					member[0].ChangeMission(mission[0].GetName());
+					member[0].SetMood(100);
+					mission[0].ChangeImpler("CH");
+					mission[0].OnDoing();
+					currentScene = ScenesRegister[3];
+				}
 			}
 			else
+				m_TextColorA = glm::vec3(0.0, 0.0, 0.0);
+
+			if (ypos > 440 && ypos < 560)
 			{
-				currentScene = ScenesRegister[2];
+				m_TextColorB = glm::vec3(0.5, 0.5, 0.5);
+				if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+				{
+					member[1].ChangeMission(mission[1].GetName());
+					member[1].SetMood(100);
+					mission[1].ChangeImpler("MG");
+					mission[1].OnDoing();
+					currentScene = ScenesRegister[3];
+				}
 			}
+			else
+				m_TextColorB = glm::vec3(0.0, 0.0, 0.0);
+
+			if (ypos > 680 && ypos < 800)
+			{
+				m_TextColorC = glm::vec3(0.5, 0.5, 0.5);
+				if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+				{
+					member[2].ChangeMission(mission[2].GetName());
+					member[2].SetMood(100);
+					mission[2].ChangeImpler("CX");
+					mission[2].OnDoing();
+					currentScene = ScenesRegister[3];
+				}
+			}
+			else
+				m_TextColorC = glm::vec3(0.0, 0.0, 0.0);
+		}
+		else
+		{
+			m_TextColorA = glm::vec3(0.0, 0.0, 0.0);
+			m_TextColorB = glm::vec3(0.0, 0.0, 0.0);
+			m_TextColorC = glm::vec3(0.0, 0.0, 0.0);
 		}
 	}
 
-	void AssignmentScene::OnRender(Text& text)
+	void AssignmentScene::OnRender(Text& text, std::vector<Member>& member,  std::vector<Mission>& mission)
 	{
 		GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
@@ -76,8 +130,12 @@ namespace scene
 		m_Texture->Bind();
 
 		{
-			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationA);
-			glm::mat4 mvp = m_Proj * m_View * model;
+			//background rendering
+			m_Texture->Bind();
+			m_Proj = glm::ortho(0.0f, 2.0f, 0.0f, 2.0f, -1.0f, 1.0f);
+			m_View = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+			model = glm::translate(glm::mat4(1.0f), glm::vec3(1, 1, 0));
+			mvp = m_Proj * m_View * model;
 
 			m_Shader->Bind();
 			m_Shader->SetUniformMat4f("u_MVP", mvp);
@@ -86,13 +144,17 @@ namespace scene
 		}
 
 		{
-			glm::mat4 model = glm::translate(glm::mat4(1.0f), m_TranslationB);
-			glm::mat4 mvp = m_Proj * m_View * model;
+			//Text rendering
+			text.RenderText("Back", 160.0f, 60.0f, 1.0f, m_TextColor);
 
-			m_Shader->Bind();
-			m_Shader->SetUniformMat4f("u_MVP", mvp);
+			text.RenderText(mission[0].GetName(), 700.0f, 800.0f, 1.0f, m_TextColorA);
+			text.RenderText(mission[0].GetImpler(), 1400.0f, 800.0f, 1.0f, m_TextColorA);
 
-			renderer.Draw(*m_VAO, *m_IndexBuffer, *m_Shader);
+			text.RenderText(mission[1].GetName(), 700.0f, 550.0f, 1.0f, m_TextColorB);
+			text.RenderText(mission[1].GetImpler(), 1400.0f, 550.0f, 1.0f, m_TextColorB);
+
+			text.RenderText(mission[2].GetName(), 700.0f, 300.0f, 1.0f, m_TextColorC);
+			text.RenderText(mission[2].GetImpler(), 1400.0f, 300.0f, 1.0f, m_TextColorC);
 		}
 
 	}

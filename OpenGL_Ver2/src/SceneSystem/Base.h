@@ -14,7 +14,11 @@
 #include "glm/detail/glm.cpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+#include "Mission.h"
+#include "Teammate.h"
+
 #include <iostream>
+#include <string>
 #include <vector>
 #include <functional>
 
@@ -26,8 +30,8 @@ namespace scene
 		Base(){}
 		virtual ~Base(){}
 
-		virtual void SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister) {}
-		virtual void OnRender(Text& text) {}
+		virtual void SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister,std::vector<Member>& member,  std::vector<Mission>& mission) {}
+		virtual void OnRender(Text& text, std::vector<Member>& member,  std::vector<Mission>& mission) {}
 		virtual void OnUpdate() {}
 	};
 }

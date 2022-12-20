@@ -23,12 +23,16 @@
 
 #include "Base.h"
 #include "MainMenu.h"
-#include "Loading.h"
 #include "AllocationScene.h"
 #include "AssignmentScene.h"
-#include "AttribScene.h"
 #include "GameMainScene.h"
 #include "TextRender.h"
+
+//#include "GameLogic/Game.hpp"
+//#include "GameLogic/Game_Object.hpp"
+
+#include "GameLogic/Teammate.h"
+#include "GameLogic/Mission.h"
 
 // FreeType
 #include <ft2build.h>
@@ -48,7 +52,7 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "International Game Jam", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -80,36 +84,73 @@ int main(void)
 		
 		scene::Base* currentScene = nullptr;
 		scene::MainMenu* MenuScene = new scene::MainMenu;
-		scene::Loading* LoadingScene = new scene::Loading;
 		scene::GameMainScene* MainScene = new scene::GameMainScene;
-		scene::AttribScene* AttribScene = new scene::AttribScene;
 		scene::AssignmentScene* AssignmentScene = new scene::AssignmentScene;
 		scene::AllocationScene* AllocScene = new scene::AllocationScene;
 
 		std::vector<scene::Base*> ScenesRegister;
 		ScenesRegister.push_back(MenuScene);
-		ScenesRegister.push_back(LoadingScene);
 		ScenesRegister.push_back(MainScene);
-		ScenesRegister.push_back(AttribScene);
 		ScenesRegister.push_back(AssignmentScene);
 		ScenesRegister.push_back(AllocScene);
 
+		//currentScene = MenuScene;
 		currentScene = MenuScene;
 
+		//GameLogic Init
+		Member CH(1), MG(2), CX(3);
+		Mission m1(1, "Document"), m2(2, "Draw"), m3(3, "Program");
+		std::vector<Member> member;
+		member.push_back(CH);
+		member.push_back(MG);
+		member.push_back(CX);
+		std::vector<Mission> mission;
+		mission.push_back(m1);
+		mission.push_back(m2);
+		mission.push_back(m3);
+
+
+		int state = 0;
 
 		/* Loop until the user closes the window */
 		while (!glfwWindowShouldClose(window))
 		{
-			
+			state++;
 			/* Render here */
 			
-			currentScene->OnRender(textrender);
-			currentScene->SceneChangeController(window,currentScene,ScenesRegister);
+			currentScene->SceneChangeController(window,currentScene,ScenesRegister,member,mission);
+			currentScene->OnRender(textrender,member,mission);
 
+			if (state%10 == 0)
+			{
+				if (mission[0].GetisDoing() && member[0].GetEfficiency() > 40)
+				{
+					member[0].ChangeMood(-5);
+					mission[0].ChangeProgress(5);
+					std::cout <<"CH: Mood" << member[0].GetEfficiency() << " Progress " << mission[0].GetProgress() << std::endl;
+				}
 
+				if (mission[1].GetisDoing() && member[1].GetEfficiency() > 40)
+				{
+					member[1].ChangeMood(-5);
+					mission[1].ChangeProgress(5);
+					std::cout << "MG: Mood" << member[1].GetEfficiency() << " Progress " << mission[1].GetProgress() << std::endl;
+				}
 
+				if (mission[2].GetisDoing()&&member[2].GetEfficiency()>40)
+				{
+					member[2].ChangeMood(-5);
+					mission[2].ChangeProgress(5);
+					std::cout << "CX: Mood" << member[2].GetEfficiency() << " Progress " << mission[2].GetProgress() << std::endl;
+				}
+			}
 
+			if (mission[0].GetProgress() >= 100 && mission[1].GetProgress() >= 100 && mission[2].GetProgress() >= 100)
+			{
+				textrender.RenderText("FINISH!", 500.0f, 500.0f, 3.0f, glm::vec3(1, 1, 0));
+			}
 
+			
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();

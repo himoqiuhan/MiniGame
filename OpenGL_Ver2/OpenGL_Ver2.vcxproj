@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\FreeType\include;src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\GameLogic;$(SolutionDir)Dependencies\FreeType\include;src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -110,7 +110,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\FreeType\include;src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\GameLogic;$(SolutionDir)Dependencies\FreeType\include;src\SceneSystem;src\Render;src\vendor;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -166,14 +166,16 @@
     <ClCompile Include="src\Render\VertexBuffer.cpp" />
     <ClCompile Include="src\SceneSystem\AllocationScene.cpp" />
     <ClCompile Include="src\SceneSystem\AssignmentScene.cpp" />
-    <ClCompile Include="src\SceneSystem\AttribScene.cpp" />
     <ClCompile Include="src\SceneSystem\GameMainScene.cpp" />
-    <ClCompile Include="src\SceneSystem\Loading.cpp" />
     <ClCompile Include="src\SceneSystem\MainMenu.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="src\vendor\stb\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameLogic\Game.hpp" />
+    <ClInclude Include="src\GameLogic\Game_Object.hpp" />
+    <ClInclude Include="src\GameLogic\Mission.h" />
+    <ClInclude Include="src\GameLogic\Teammate.h" />
     <ClInclude Include="src\Render\GLCall.h" />
     <ClInclude Include="src\Render\IndexBuffer.h" />
     <ClInclude Include="src\Render\Renderer.hpp" />
@@ -185,10 +187,8 @@
     <ClInclude Include="src\Render\VertexBufferLayout.h" />
     <ClInclude Include="src\SceneSystem\AllocationScene.h" />
     <ClInclude Include="src\SceneSystem\AssignmentScene.h" />
-    <ClInclude Include="src\SceneSystem\AttribScene.h" />
     <ClInclude Include="src\SceneSystem\Base.h" />
     <ClInclude Include="src\SceneSystem\GameMainScene.h" />
-    <ClInclude Include="src\SceneSystem\Loading.h" />
     <ClInclude Include="src\SceneSystem\MainMenu.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_common.hpp" />
@@ -617,12 +617,17 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\AllocScene.jpg" />
-    <Image Include="res\textures\AssignmentScene.jpg" />
+    <Image Include="res\textures\AssignmentScene.png" />
     <Image Include="res\textures\AttribScene.jpg" />
     <Image Include="res\textures\Button.jpg" />
+    <Image Include="res\textures\GameMainScene.png" />
     <Image Include="res\textures\GamingMainScene.jpg" />
-    <Image Include="res\textures\Loading.jpg" />
+    <Image Include="res\textures\Loading.png" />
     <Image Include="res\textures\MainMenu.png" />
+    <Image Include="res\textures\TextureA.png" />
+    <Image Include="res\textures\TextureB.png" />
+    <Image Include="res\textures\TextureC.png" />
+    <Image Include="res\textures\White.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\fonts\arial.ttf" />

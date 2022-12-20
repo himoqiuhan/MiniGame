@@ -45,16 +45,10 @@
     <ClCompile Include="src\SceneSystem\MainMenu.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\SceneSystem\Loading.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\SceneSystem\AllocationScene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\SceneSystem\AssignmentScene.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SceneSystem\AttribScene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\SceneSystem\GameMainScene.cpp">
@@ -944,12 +938,6 @@
     <ClInclude Include="src\SceneSystem\MainMenu.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\SceneSystem\Loading.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SceneSystem\AttribScene.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\SceneSystem\AllocationScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -960,6 +948,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Render\TextRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLogic\Game.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLogic\Game_Object.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLogic\Teammate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameLogic\Mission.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1377,13 +1377,7 @@
     <None Include="res\shaders\Text.shader" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\textures\Loading.jpg">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="res\textures\AllocScene.jpg">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="res\textures\AssignmentScene.jpg">
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\textures\AttribScene.jpg">
@@ -1396,6 +1390,27 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="res\textures\Button.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\textures\Loading.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\textures\White.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\textures\GameMainScene.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\textures\TextureA.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\textures\TextureB.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\textures\TextureC.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="res\textures\AssignmentScene.png">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

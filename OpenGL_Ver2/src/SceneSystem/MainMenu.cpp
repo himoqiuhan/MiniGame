@@ -34,7 +34,7 @@ namespace scene
 		m_Shader = std::make_unique<Shader>("res/shaders/Basic.shader");
 		m_ShaderBack = std::make_unique<Shader>("res/shaders/Framework.shader");
 
-		m_TextureBackgound = std::make_unique<Texture>("res/textures/MainMenu.png");
+		m_TextureBackground = std::make_unique<Texture>("res/textures/MainMenu.png");
 		m_TextureButton = std::make_unique<Texture>("res/textures/Button.jpg");
 
 	}
@@ -43,7 +43,7 @@ namespace scene
 	{
 	}
 
-	void MainMenu::SceneChangeController(GLFWwindow* window,Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister)
+	void MainMenu::SceneChangeController(GLFWwindow* window, Base*& currentScene, const std::vector<scene::Base*>& ScenesRegister, std::vector<Member>& member, std::vector<Mission>& mission)
 	{
 		glfwGetCursorPos(window, &xpos, &ypos);
 
@@ -67,7 +67,7 @@ namespace scene
 		}
 	}
 
-	void MainMenu::OnRender(Text& text)
+	void MainMenu::OnRender(Text& text, std::vector<Member>& member,  std::vector<Mission>& mission)
 	{
 		GLCall(glClearColor(0.2f, 0.3f, 1.0f, 1.0f));
 		GLCall(glClear(GL_COLOR_BUFFER_BIT));
@@ -76,7 +76,7 @@ namespace scene
 
 		{
 			//background rendering
-			m_TextureBackgound->Bind();
+			m_TextureBackground->Bind();
 			m_Proj = glm::ortho(0.0f, 2.0f, 0.0f, 2.0f, -1.0f, 1.0f);
 			m_View = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 			model = glm::translate(glm::mat4(1.0f), glm::vec3(1, 1, 0));
@@ -92,7 +92,7 @@ namespace scene
 		{
 			if (ypos < 620 && ypos > 470)
 			{
-				m_TextureBackgound->Unbind();
+				m_TextureBackground->Unbind();
 				m_Proj = glm::ortho(0.0f, 8.0f, 0.0f, 10.0f, -1.0f, 1.0f);
 				m_View = glm::translate(glm::mat4(1.0f), glm::vec3(1.5, 3.4, 0));
 	
@@ -105,7 +105,7 @@ namespace scene
 			}
 			else if (ypos < 950 && ypos > 800)
 			{
-				m_TextureBackgound->Unbind();
+				m_TextureBackground->Unbind();
 				m_Proj = glm::ortho(0.0f, 8.0f, 0.0f, 10.0f, -1.0f, 1.0f);
 				m_View = glm::translate(glm::mat4(1.0f), glm::vec3(1.5, 3.4, 0));
 
